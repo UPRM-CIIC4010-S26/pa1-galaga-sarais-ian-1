@@ -188,4 +188,25 @@ void Program::Reset() {
     count = 0;
     delay = 0;
     lives = 3;
+
+    //crear los enemigos, mismos del codigo //
+    Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{350, 150}, 
+            new SpEnemy(350, 150)
+        });
+
+    Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{600, 150}, 
+            new SpEnemy(600, 150)
+        });
+
+    for (int i = 0; i < 30; i++) {
+        float x = 250 + 50 * (i%10); //restart x cuando ultimo digito =0
+        float y = 200 + 50 * (i/10); //para q quede en filas
+
+        Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
+            std::pair<float, float>{x, y}, 
+            new StdEnemy(x, y)
+        });
+    }
 }
