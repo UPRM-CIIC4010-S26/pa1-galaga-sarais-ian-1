@@ -57,7 +57,8 @@ void Program::Update() {
 
         for (Projectile& p : Projectile::projectiles) { 
             p.update(); 
-
+            if (p.ID != 0 && HitBox::Collision(player->hitBox,p.getHitBox())) //si id no es 0 es enemigo, y HitBox devuelve su se tocan o no//
+                PlayerReset();  //si toca renicia//
         }
 
         if (lives <= 0 && pauseFrames <= 0) gameOver = true;
