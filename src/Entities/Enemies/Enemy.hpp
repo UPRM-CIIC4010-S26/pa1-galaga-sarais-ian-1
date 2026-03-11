@@ -61,7 +61,6 @@ class Enemy {
                         Animation::animations.push_back(
                             Animation(p.second->position.first, p.second->position.second, 155, 0, 33, 33, 30, 30, 4, ImageManager::SpriteSheet)
                         );
-                        score +=100; //cundo vida enemigo < 0 sumar a score//
                         p.second = nullptr;
                     }
                 }
