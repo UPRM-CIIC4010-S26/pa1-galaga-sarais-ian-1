@@ -17,9 +17,11 @@ class Program {
         int respawns = 0;
         int count = 0;
         int delay = 0;
-        int lives = 3;
         int pauseFrames = 0;
+        int lives = 3;
         int score = 0; // add variable de score//
+        int next_life_score = 1000; // add lives //
+       
 
         bool startup = true;
         bool paused = false;
@@ -37,6 +39,10 @@ class Program {
         void KeyInputs();
         void PlayerReset();
         void Reset();
+        int getScore() const {return score;}
+        int getNextLifeScore() const {return next_life_score;}
+        int getlives() const {return lives;} 
+        void AddScore(int amount);
           
         ~Program() {}
 };

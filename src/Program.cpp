@@ -26,6 +26,14 @@ Program::Program() {
         });
     }
 }
+void Program ::AddScore(int amount) {
+        if (amount <= 0)
+            score += amount;
+        while (score >= next_life_score) {
+            if (lives < 5) lives++;
+            next_life_score += 1000;
+        }
+}
 
 void Program::Update() {
     for (Animation& a : Animation::animations) a.update();
@@ -35,7 +43,7 @@ void Program::Update() {
     pauseFrames = std::max(pauseFrames - 1, 0);
 
     if (!startup && !paused && !gameOver && pauseFrames <= 0) {
-        Enemy::ManageEnemies(player->hitBox);
+        Enemy::ManageEnemies(player->hitBox,this);
         StdEnemy::attackReset();
         ManageEnemyRespawns();
         player->update();
@@ -158,7 +166,7 @@ void Program::KeyInputs() {
         gameOver = false;
         Reset();
     }
-
+    if (IsKeyPressed('K')) score += 100; //test score increase//
     if (startup && IsKeyPressed(KEY_ENTER)) {
         startup = false;
     }
@@ -188,6 +196,8 @@ void Program::Reset() {
     count = 0;
     delay = 0;
     lives = 3;
+    score = 0;
+    next_life_score = 1000;
 
     //crear los enemigos, mismos del codigo //
     Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
@@ -210,3 +220,4 @@ void Program::Reset() {
         });
     }
 }
+ 
