@@ -19,7 +19,9 @@ class Program {
         int delay = 0;
         int lives = 3;
         int pauseFrames = 0;
-        int score = 0; // add variable de score//
+
+        // add variable //
+        int score = 0; 
 
         bool startup = true;
         bool paused = false;
@@ -37,6 +39,9 @@ class Program {
         void KeyInputs();
         void PlayerReset();
         void Reset();
+
+        //Add function//
+        void DrawScore(); // add para display score//
           
         ~Program() {}
 };
