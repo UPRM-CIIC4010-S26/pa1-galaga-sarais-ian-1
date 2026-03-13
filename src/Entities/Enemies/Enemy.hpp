@@ -20,6 +20,9 @@ class Enemy {
         std::pair<float, float> position;
         HitBox hitBox;
 
+        //add variables //
+        int scoreValue = 0;
+
         inline static float direction = 0.5;
         inline static int directionChange = 100;
         inline static std::vector<std::pair<std::pair<float, float>, Enemy*>> enemies;
@@ -47,7 +50,8 @@ class Enemy {
              }
         }
 
-        static void ManageEnemies(HitBox target, Program* program) {
+        static int ManageEnemies(HitBox target) {
+            int pointsEarned = 0;
             for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) {
                 p.first.first += (p.first.first == 0) ? 0 : direction;
                 if (p.second) {
@@ -61,13 +65,9 @@ class Enemy {
                     }
 
                     if (p.second->health <= 0) {
-                        program->getScore() += p.second->scoreValue;
-                        while (program->getlives() >= program->getNextLifeScore()) {
-                           if (program->getlives() < 5) { // Assuming a maximum of 5 lives
-                                program->getNextLifeScore() += 1000; // Increment the score required for the next life
-                            }
-                            program->getNextLifeScore() += 1000;
-                        }
+
+                        pointsEarned += p.second->scoreValue; //add points when enemy destroyed//
+
                         Animation::animations.push_back(
                             Animation(p.second->position.first, p.second->position.second, 155, 0, 33, 33, 30, 30, 4, ImageManager::SpriteSheet)
                         );
@@ -89,5 +89,6 @@ class Enemy {
                 directionChange = 0;
                 direction *= -1;
             }
+            return pointsEarned;
         }
 };

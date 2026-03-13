@@ -18,10 +18,10 @@ class Program {
         int count = 0;
         int delay = 0;
         int pauseFrames = 0;
-        int lives = 3;
-        int score = 0; // add variable de score//
-        int next_life_score = 1000; // add lives //
-       
+
+        // add variable //
+        int score = 0; 
+        int nextLifeScore = 1000;
 
         bool startup = true;
         bool paused = false;
@@ -39,9 +39,12 @@ class Program {
         void KeyInputs();
         void PlayerReset();
         void Reset();
-        int getScore() const {return score;}
-        int getNextLifeScore() const {return next_life_score;}
-        int getlives() const {return lives;}
-                  
+
+        //Add function//
+        void DrawScore(); //display el score//
+        void DrawLives(); // add display lives//
+
+
+          
         ~Program() {}
 };

@@ -7,11 +7,13 @@ class DyEnemy : public Enemy {
         float aimAngle = 225;
         bool loop = false;
 
+
+
     public:
         DyEnemy(float x, float y) : Enemy(x, y) { 
             this->cooldown = GetRandomValue(90, 300);
             this->health = 1; 
-            this->scoreValue = 150;
+            this->scoreValue = 700;
         }
 
         void draw() override;

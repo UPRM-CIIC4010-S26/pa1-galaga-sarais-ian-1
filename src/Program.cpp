@@ -26,14 +26,6 @@ Program::Program() {
         });
     }
 }
-void Program ::AddScore(int amount) {
-        if (amount <= 0)
-            score += amount;
-        while (score >= next_life_score) {
-            if (lives < 5) lives++;
-            next_life_score += 1000;
-        }
-}
 
 void Program::Update() {
     for (Animation& a : Animation::animations) a.update();
@@ -43,7 +35,13 @@ void Program::Update() {
     pauseFrames = std::max(pauseFrames - 1, 0);
 
     if (!startup && !paused && !gameOver && pauseFrames <= 0) {
-        Enemy::ManageEnemies(player->hitBox,this);
+        score += Enemy::ManageEnemies(player->hitBox);
+
+        if (score >= nextLifeScore) {
+            if (lives < 5) {
+                lives++;}
+            nextLifeScore += 1000; } //cuando tenga 1000 en score add 1 life//
+
         StdEnemy::attackReset();
         ManageEnemyRespawns();
         player->update();
@@ -70,8 +68,8 @@ void Program::Update() {
         }
 
         if (lives <= 0 && pauseFrames <= 0) gameOver = true;
-        Projectile::CleanProjectiles();
         Projectile::ProjectileCollision();
+        Projectile::CleanProjectiles();
     }
 }
 
@@ -90,6 +88,8 @@ void Program::Draw() {
     for (Projectile p : Projectile::projectiles) p.draw();
     for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) if (p.second) p.second->draw();
 
+    DrawScore(); // para display score//
+    DrawLives(); // para display lives//
     if (startup) DrawStartup();
     if (paused) DrawPauseScreen();
     if (gameOver) DrawGameOver();
@@ -98,7 +98,13 @@ void Program::Draw() {
 void Program::ManageEnemyRespawns() {
     delay = std::max(delay - 1, 0);
 
-    respawnCooldown -= 1;
+    //respawnCooldown -= 1;//
+    int newSpeed = 1+score /1000; //mas score mas fast//
+    if (newSpeed > 6) {
+        newSpeed = 6; }
+
+    respawnCooldown -= newSpeed;
+
     if (respawnCooldown <= 0) {
         respawnCooldown = 1080;
         for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) {
@@ -156,6 +162,14 @@ void Program::DrawGameOver() {
     DrawText("Press Enter", (GetScreenWidth() / 2) - 75, GetScreenHeight() / 2, 24, GRAY);
 }
 
+void Program::DrawScore() {
+    DrawText(TextFormat("Score: %i", score), 20, 20, 30, WHITE);  //display score //
+}
+
+void Program::DrawLives() {
+    DrawText(TextFormat("Lives: %i", lives), 20, 60, 30, WHITE);
+}
+
 void Program::KeyInputs() {
     if ((!gameOver && !startup && IsKeyPressed('P')) || (paused && IsKeyPressed(KEY_ENTER))) paused = !paused;
     if (!paused && !startup && IsKeyPressed('O')) gameOver = !gameOver;
@@ -173,6 +187,7 @@ void Program::KeyInputs() {
 
     if (!startup && !paused && !gameOver && pauseFrames <= 0) player->keyInputs();
    
+    if (IsKeyPressed('K')) score += 500;
 }
 
 void Program::PlayerReset() {
@@ -197,7 +212,7 @@ void Program::Reset() {
     delay = 0;
     lives = 3;
     score = 0;
-    next_life_score = 1000;
+    nextLifeScore = 1000;
 
     //crear los enemigos, mismos del codigo //
     Enemy::enemies.push_back(std::pair<std::pair<float, float>, Enemy*> {
