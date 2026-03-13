@@ -36,8 +36,8 @@ void Projectile::ProjectileCollision() {
             if (HitBox::Collision(projectiles[i].getHitBox(), projectiles[j].getHitBox())) {
                 projectiles[i].del = true;
                 projectiles[j].del = true;
+                
             }
         }
-        
     }
 }

@@ -5,14 +5,18 @@ class StEnemy : public Enemy {
     private: 
         float angle = 90;
 
+
+
     public:
         StEnemy(float x, float y) : Enemy(x, y) { 
             this->cooldown = GetRandomValue(90, 600);
+            this->scoreValue = 300;
         }
 
         StEnemy(float x, float y, bool newSpawn) : Enemy(x, y){
             this->cooldown = GetRandomValue(120, 600);
             this->spawning = newSpawn;
+            this->scoreValue = 300;
         }
 
         void draw() override;

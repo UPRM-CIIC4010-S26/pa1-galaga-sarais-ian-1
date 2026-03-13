@@ -36,6 +36,6 @@ class Projectile {
         void draw();
         void update();
         static void CleanProjectiles();
-        static void ProjectileCollision();
+        static void ProjectileCollision(); 
 
 };
