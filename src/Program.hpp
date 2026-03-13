@@ -22,6 +22,7 @@ class Program {
 
         // add variable //
         int score = 0; 
+        int nextLifeScore = 1000;
 
         bool startup = true;
         bool paused = false;
@@ -41,7 +42,8 @@ class Program {
         void Reset();
 
         //Add function//
-        void DrawScore(); // add para display score//
+        void DrawScore(); //display el score//
+        void DrawLives(); // add display lives//
 
 
           
