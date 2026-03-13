@@ -41,8 +41,7 @@ class Program {
         void Reset();
         int getScore() const {return score;}
         int getNextLifeScore() const {return next_life_score;}
-        int getlives() const {return lives;} 
-        void AddScore(int amount);
-          
+        int getlives() const {return lives;}
+                  
         ~Program() {}
 };

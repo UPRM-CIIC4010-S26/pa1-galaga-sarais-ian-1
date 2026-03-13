@@ -166,7 +166,7 @@ void Program::KeyInputs() {
         gameOver = false;
         Reset();
     }
-    if (IsKeyPressed('K')) score += 100; //test score increase//
+    if (IsKeyPressed('K')) score += 500; //test score increase//
     if (startup && IsKeyPressed(KEY_ENTER)) {
         startup = false;
     }
