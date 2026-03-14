@@ -1,7 +1,7 @@
 #pragma once
 #include "Enemy.hpp"
 
-class StdEnemy : public Enemy {
+class StEnemy : public Enemy {
     private: 
         float angle = 90;
         int specialCooldown = GetRandomValue(300, 3600);
@@ -18,17 +18,16 @@ class StdEnemy : public Enemy {
             this->scoreValue = 100;
         }
 
-        StdEnemy(float x, float y, bool newSpawn) : Enemy(x, y){
-            this->cooldown = GetRandomValue(300, 1380);
+        StEnemy(float x, float y, bool newSpawn) : Enemy(x, y){
+            this->cooldown = GetRandomValue(120, 600);
             this->health = 2;
-            this->scoreValue = 200;
             this->spawning = newSpawn;
             this->scoreValue = 100;
         }
 
         void draw() override;
         void update(std::pair<float, float> pos, HitBox target) override;
-        void attack(HitBox target) override;
+        void attack(HitBox target) override; 
 
         static void attackReset() {
             if (attackInProgress) {
