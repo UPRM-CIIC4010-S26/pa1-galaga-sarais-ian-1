@@ -2,15 +2,8 @@
 
 
 void DyEnemy::draw() {
-    Rectangle source;
     if (HitBox::drawHitbox) this->hitBox.draw();
-        texture = GetRandomValue(0, 1); 
-        if (texture == 0) {
-            source = Rectangle{2, 128, 13, 14};
-        } else {
-            source = Rectangle{17, 128, 13, 14};
-        }
-       DrawTexturePro(ImageManager::SpriteSheet, source, 
+    DrawTexturePro(ImageManager::SpriteSheet, Rectangle{2, 128, 13, 14}, 
                 Rectangle{this->position.first + 15, this->position.second + 15, 30, 30}, 
                 Vector2{15, 15}, this->aimAngle, WHITE);
 }
