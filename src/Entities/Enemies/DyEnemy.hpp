@@ -7,6 +7,7 @@ class DyEnemy : public Enemy {
         float aimAngle = 225;
         bool loop = false;
         int texture = 0;
+        
 
 
 
