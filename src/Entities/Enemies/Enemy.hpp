@@ -27,8 +27,6 @@ class Enemy {
         inline static int directionChange = 100;
         inline static std::vector<std::pair<std::pair<float, float>, Enemy*>> enemies;
 
-        int scoreValue;
-
         Enemy() {}
 
         Enemy(float x, float y) {
@@ -66,7 +64,7 @@ class Enemy {
 
                     if (p.second->health <= 0) {
 
-                        pointsEarned += p.second->scoreValue; //add points when enemy destroyed//
+                        pointsEarned += p.second->scoreValue; //add points caundo enemy destroyed//
 
                         Animation::animations.push_back(
                             Animation(p.second->position.first, p.second->position.second, 155, 0, 33, 33, 30, 30, 4, ImageManager::SpriteSheet)
