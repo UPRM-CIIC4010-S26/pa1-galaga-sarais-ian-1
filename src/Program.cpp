@@ -167,7 +167,7 @@ void Program::DrawScore() {
 }
 
 void Program::DrawLives() {
-    DrawText(TextFormat("Lives: %i", lives), 20, 60, 30, WHITE);
+    DrawText(TextFormat("Lives: %i", lives), 20, 60, 30, WHITE); //display live//
 }
 
 void Program::KeyInputs() {
@@ -180,14 +180,14 @@ void Program::KeyInputs() {
         gameOver = false;
         Reset();
     }
-    if (IsKeyPressed('K')) score += 500; //test score increase//
+
     if (startup && IsKeyPressed(KEY_ENTER)) {
         startup = false;
     }
 
     if (!startup && !paused && !gameOver && pauseFrames <= 0) player->keyInputs();
    
-    if (IsKeyPressed('K')) score += 500;
+    if (IsKeyPressed('K')) score += 500; //add to score //
 }
 
 void Program::PlayerReset() {
