@@ -6,6 +6,7 @@ class DyEnemy : public Enemy {
         float angle = 135;
         float aimAngle = 225;
         bool loop = false;
+        int texture = 0;
 
 
 
@@ -14,6 +15,7 @@ class DyEnemy : public Enemy {
             this->cooldown = GetRandomValue(90, 300);
             this->health = 1; 
             this->scoreValue = 700;
+            this->texture = GetRandomValue(0, 1); 
         }
 
         void draw() override;
